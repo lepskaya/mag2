@@ -1,16 +1,37 @@
-import React, { Component } from 'react'
-import Item from './Item'
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import Item from './Item.js'
 
-export class Items extends Component {
-  render() {
+function Items()  {
+
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:4444/items').then((r) => {
+      setItems(r.data)
+    }).catch((e) => {
+      console.log(e)
+    })
+  }, []);
+/*
+  return (
+      <div>
+        <h1>items</h1>
+        <ul>
+          {items.map((i) => (<li key={i._id}>
+            {i.title} ({i.desc})
+          </li>))}
+        </ul>
+      </div>
+  )
+*/
     return (
       <main>
-        {this.props.items.map(el=> (
-          <Item onShowItem={this.props.onShowItem} key={el.id} item={el} onAdd={this.props.onAdd} />
+        {items.map(el=> (
+          <Item key={el._id} item={el}  />
         ))}
       </main>
     )
-  }
 }
 
 export default Items

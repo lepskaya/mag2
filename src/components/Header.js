@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import {FaShoppingCart} from "react-icons/fa";
-import Order from './Order';
+import {FaShoppingCart} from "react-icons/fa/index.js";
+import Order from './Order.js';
 
 
 const showOrders = (props) => {
